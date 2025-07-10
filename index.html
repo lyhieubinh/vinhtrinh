@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký lấy số tự động</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+    h2 { color: #333; }
+    input, button { margin: 10px 0; padding: 8px; width: 100%; }
+    #result { margin-top: 20px; background: #fff; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Đăng ký lấy số tự động</h2>
+  <form id="infoForm">
+    <label>Họ tên:</label><input type="text" id="name" required>
+    <label>Điện thoại:</label><input type="text" id="phone" required>
+    <label>Dịch vụ cần sử dụng:</label><input type="text" id="service" required>
+    <button type="submit">Gửi thông tin</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("infoForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const service = document.getElementById("service").value;
+
+      const content = `Họ tên: ${name}\nĐiện thoại: ${phone}\nDịch vụ: ${service}`;
+      document.getElementById("result").innerText = content;
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "thong_tin.txt";
+      link.innerText = "📥 Tải về thông tin";
+      document.getElementById("result").appendChild(document.createElement("br"));
+      document.getElementById("result").appendChild(link);
+    });
+  </script>
+</body>
+</html>
